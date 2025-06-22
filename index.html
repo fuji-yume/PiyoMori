@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ぴよもり：絶対止まるぴよ版</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="piyomori.js" defer></script>
+</head>
+<body>
+
+<div id="mode-select">
+  <h2>モードを選んでね！</h2>
+  <button onclick="chooseMokupiyo()">もくぴよモード</button>
+  <button onclick="chooseMorimori()">もりもりモード</button>
+</div>
+
+<div id="target-time-input" style="display:none;">
+  <h2>目標時間（分）を入力！</h2>
+  <input type="number" id="target-minutes" min="1" placeholder="例：25">
+  <br><br>
+  <button onclick="startMokupiyo()">スタート！</button>
+</div>
+
+<div id="timer">経過時間：00:00</div>
+
+<div id="result">
+  <h2>集中終了！</h2>
+  <p id="result-time"></p>
+  <p id="result-birds"></p>
+  <button onclick="restartPiyomori()">もう一度！</button>
+</div>
+
+<script src="piyomori.js"></script>
+</body>
+</html>
