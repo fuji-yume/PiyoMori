@@ -75,16 +75,30 @@ body::before {
 }
 
 #target-time-input {
-  padding: 30px 20px;
+  padding: 40px 30px;
 }
 
 #target-time-input h2 {
-  font-size: 20px;
-  margin-bottom: 15px;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#target-minutes {
+  font-size: 24px;         /* ←デカくてズームされない */
+  padding: 12px 20px;
+  width: 160px;            /* ←指で押しやすい幅に！ */
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 12px;
 }
 
 button {
-  font-size: 18px;
-  padding: 12px 24px;
+  font-size: 22px;         /* ←全体的に大きめに！ */
+  padding: 14px 30px;
+  margin: 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: #ffdd57;
+  cursor: pointer;
 }
 
