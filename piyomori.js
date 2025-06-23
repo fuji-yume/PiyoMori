@@ -24,6 +24,7 @@ function chooseMorimori() {
   mode = "morimori";
   document.getElementById("mode-select").style.display = "none";
   document.getElementById("timer").style.display = "block";
+
   setTimeout(() => {
     startPiyomori();
     activateEndTriggers();
@@ -146,7 +147,6 @@ function flyAwayBirds() {
     }, 1000);
   });
 
-  // 逃げちゃったメッセージを後に表示
   setTimeout(() => {
     const message = document.createElement('div');
     message.textContent = "逃げちゃった...";
@@ -166,7 +166,7 @@ function flyAwayBirds() {
       message.remove();
       showResult();
     }, 1000);
-  }, 1000);
+  }, 1200);
 }
 
 function showResult() {
@@ -192,4 +192,6 @@ function activateEndTriggers() {
 }
 
 window.chooseMorimori = chooseMorimori;
+window.chooseMokupiyo = chooseMokupiyo;
 window.startMokupiyo = startMokupiyo;
+window.restartPiyomori = restartPiyomori;
