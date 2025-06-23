@@ -147,26 +147,25 @@ function flyAwayBirds() {
     }, 1000);
   });
 
-  setTimeout(() => {
-    const message = document.createElement('div');
-    message.textContent = "逃げちゃった...";
-    message.style.position = 'fixed';
-    message.style.top = '40%';
-    message.style.left = '50%';
-    message.style.transform = 'translate(-50%, -50%)';
-    message.style.background = 'rgba(255,255,255,0.9)';
-    message.style.padding = '20px 40px';
-    message.style.borderRadius = '20px';
-    message.style.boxShadow = '0 0 10px rgba(0,0,0,0.3)';
-    message.style.fontSize = '24px';
-    message.style.zIndex = 2000;
-    document.body.appendChild(message);
+ setTimeout(() => {
+  const message = document.createElement('div');
+  message.textContent = "ぴよは森に飛び去った。";
+  message.style.position = 'fixed';
+  message.style.top = '40%';
+  message.style.left = '50%';
+  message.style.transform = 'translate(-50%, -50%)';
+  message.style.fontFamily = "'Hina Mincho', serif";
+  message.style.color = "#003300";
+  message.style.fontSize = "20px";
+  message.style.whiteSpace = 'nowrap';
+  message.style.zIndex = 2000;
+  document.body.appendChild(message);
 
-    setTimeout(() => {
-      message.remove();
-      showResult();
-    }, 1000);
-  }, 1200);
+  setTimeout(() => {
+    message.remove();
+    showResult();
+  }, 1000);
+}, 1200);
 }
 
 function showResult() {
