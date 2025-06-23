@@ -75,30 +75,42 @@ body::before {
 }
 
 #target-time-input {
-  padding: 40px 30px;
+  padding: 30px 20px;
+  max-width: 90%;
+  box-sizing: border-box;
 }
 
 #target-time-input h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px; /* 入力とボタンの隙間 */
+  flex-wrap: wrap; /* 小さい画面で折り返し */
 }
 
 #target-minutes {
-  font-size: 24px;         /* ←デカくてズームされない */
-  padding: 12px 20px;
-  width: 160px;            /* ←指で押しやすい幅に！ */
+  font-size: 20px;
+  padding: 10px 16px;
+  width: 120px;
   text-align: center;
   border: 2px solid #ccc;
-  border-radius: 12px;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
 
 button {
-  font-size: 22px;         /* ←全体的に大きめに！ */
-  padding: 14px 30px;
-  margin: 12px;
+  font-size: 18px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: #ffdd57;
   cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap; /* 文字を折り返さない */
 }
-
