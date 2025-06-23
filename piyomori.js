@@ -154,16 +154,27 @@ function flyAwayBirds() {
   message.style.top = '40%';
   message.style.left = '50%';
   message.style.transform = 'translate(-50%, -50%)';
-  message.style.fontFamily = "'Hina Mincho', serif";
-  message.style.color = "#003300";
-  message.style.fontSize = "20px";
+  message.style.fontFamily = "'Yomogi', cursive";
+  message.style.color = "#ffffff";
+  message.style.fontSize = "28px";
   message.style.whiteSpace = 'nowrap';
   message.style.zIndex = 2000;
+  message.style.opacity = '0';
+  message.style.transition = 'opacity 0.5s ease';
   document.body.appendChild(message);
 
+  // フェードイン
   setTimeout(() => {
-    message.remove();
-    showResult();
+    message.style.opacity = '1';
+  }, 10);
+
+  // フェードアウト → 削除 → showResult
+  setTimeout(() => {
+    message.style.opacity = '0';
+    setTimeout(() => {
+      message.remove();
+      showResult();
+    }, 500);
   }, 1000);
 }, 1200);
 }
@@ -175,7 +186,7 @@ function showResult() {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
 
-  document.getElementById("result-time").textContent = `集中できた時間：${minutes}分${seconds}秒`;
+  document.getElementById("result-time").textContent = `すごした時間：${minutes}分${seconds}秒`;
   document.getElementById("result-birds").textContent = `集まったぴよ：${birdsLanded}羽`;
   document.getElementById("result").style.display = "block";
 }
