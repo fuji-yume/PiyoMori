@@ -74,12 +74,17 @@ body::before {
   z-index: 1000;
 }
 
+#target-time-input {
+  padding: 30px 20px;
+}
+
+#target-time-input h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 button {
   font-size: 18px;
-  padding: 10px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  background-color: #ffdd57;
-  cursor: pointer;
+  padding: 12px 24px;
 }
+
