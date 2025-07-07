@@ -129,3 +129,18 @@ button {
   border-radius: 10px;
   flex-shrink: 0;
 }
+
+#mode-select button {
+  font-size: 18px;
+  padding: 12px 24px;
+  margin: 16px; /* ← 間隔を広く */
+  border: none;
+  border-radius: 10px;
+  background-color: #b2ac93;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 500;
+  white-space: nowrap; /* ← 改行させない */
+  max-width: 90vw;
+}

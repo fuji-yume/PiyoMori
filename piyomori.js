@@ -13,6 +13,7 @@ let birdsLanded = 0;
 let timerAnimationId = null;
 let birdHasFlown = false;
 let mode = null;
+let escapeTime = null;
 
 function chooseMokupiyo() {
   mode = "mokupiyo";
@@ -70,6 +71,7 @@ function startPiyomori() {
 }
 
 function createBird(index) {
+  if (birdHasFlown) return;
   const bird = document.createElement('div');
   bird.className = 'bird';
   bird.id = `bird${index}`;
@@ -123,6 +125,7 @@ function flyAwayBirds() {
   if (birdHasFlown) return;
   birdHasFlown = true;
   cancelAnimationFrame(timerAnimationId);
+  escapeTime = Date.now();
 
   const birds = document.querySelectorAll('.bird');
   birds.forEach(bird => {
@@ -147,40 +150,38 @@ function flyAwayBirds() {
     }, 1000);
   });
 
- setTimeout(() => {
-  const message = document.createElement('div');
-  message.textContent = "ぴよは森に飛び去った。";
-  message.style.position = 'fixed';
-  message.style.top = '40%';
-  message.style.left = '50%';
-  message.style.transform = 'translate(-50%, -50%)';
-  message.style.fontFamily = "'Yomogi', cursive";
-  message.style.color = "#ffffff";
-  message.style.fontSize = "28px";
-  message.style.whiteSpace = 'nowrap';
-  message.style.zIndex = 2000;
-  message.style.opacity = '0';
-  message.style.transition = 'opacity 0.5s ease';
-  document.body.appendChild(message);
-
-  // フェードイン
   setTimeout(() => {
-    message.style.opacity = '1';
-  }, 10);
-
-  // フェードアウト → 削除 → showResult
-  setTimeout(() => {
+    const message = document.createElement('div');
+    message.textContent = "ぴよは森に飛び去った。";
+    message.style.position = 'fixed';
+    message.style.top = '40%';
+    message.style.left = '50%';
+    message.style.transform = 'translate(-50%, -50%)';
+    message.style.fontFamily = "'Yomogi', cursive";
+    message.style.color = "#ffffff";
+    message.style.fontSize = "32px";
+    message.style.whiteSpace = 'nowrap';
+    message.style.zIndex = 2000;
     message.style.opacity = '0';
+    message.style.transition = 'opacity 0.5s ease';
+    document.body.appendChild(message);
+
     setTimeout(() => {
-      message.remove();
-      showResult();
-    }, 500);
-  }, 1000);
-}, 1200);
+      message.style.opacity = '1';
+    }, 10);
+
+    setTimeout(() => {
+      message.style.opacity = '0';
+      setTimeout(() => {
+        message.remove();
+        showResult();
+      }, 500);
+    }, 1000);
+  }, 1200);
 }
 
 function showResult() {
-  const now = Date.now();
+  const now = escapeTime || Date.now();
   const elapsed = now - startTime;
   const totalSeconds = Math.floor(elapsed / 1000);
   const minutes = Math.floor(totalSeconds / 60);
