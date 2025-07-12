@@ -5,15 +5,25 @@
   <title>ぴよもり：ぴよのもりで集中タイマー</title>
   <link rel="stylesheet" href="style.css" />
   <script src="piyomori.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yomogi&family=M+PLUS+Rounded+1c:wght@100;500&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 </head>
 <body>
 
   <div id="mode-select">
     <h2>どっちにする？</h2>
+
     <button onclick="chooseMokupiyo()">もくぴよモード</button>
+    <button class="explanation-btn" onclick="toggleExplanation('mokupiyo-explanation')">もくぴよモードとは？</button>
+    <p id="mokupiyo-explanation" class="mode-explanation">
+      最初に目標時間（分）を決め、それに向かって頑張るモードです。ぴよは5分に1匹飛んできます。
+    </p>
+
     <button onclick="chooseMorimori()">もりもりモード</button>
+    <button class="explanation-btn" onclick="toggleExplanation('morimori-explanation')">もりもりモードとは？</button>
+    <p id="morimori-explanation" class="mode-explanation">
+      タイマーがカウントアップしていくモードです。ぴよは5分に1匹飛んできます。
+    </p>
   </div>
 
   <div id="target-time-input" style="display: none;">

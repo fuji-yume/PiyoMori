@@ -15,11 +15,9 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
   background-image: url('background.PNG');
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
   pointer-events: none;
@@ -29,33 +27,62 @@ body::before {
 #mode-select h2,
 #timer,
 #result h2,
-#target-time-input h2 {
+#target-time-input h2,
+#goal-message {
   font-family: 'Yomogi', cursive;
 }
 
-/* リザルト内容（時間・ぴよ数）に Thin 100 */
+/* リザルト詳細に Thin 100 */
+/* 明示的にフォントを再指定 */
 #result-time,
 #result-birds {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-weight: 100;
-  font-size: 18px;
+  font-family: 'M PLUS Rounded 1c', sans-serif !important;
+  font-weight: 100 !important;
+  font-size: 18px !important;
+  color: #333333 !important;
 }
 
-/* ボタンのスタイル（Medium 500 & 色変更） */
+/* ボタンの共通スタイル */
 button {
-	font-family: 'M PLUS Rounded 1c', sans-serif;
-	font-weight: 500;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: 500;
   font-size: 18px;
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
-  background-color: #b2ac93; /* ←ここ変更 */
-  color: #ffffff; /* ←ここ変更 */
+  background-color: #b2ac93;
+  color: #ffffff;
   cursor: pointer;
-  flex-shrink: 0;
   white-space: nowrap;
+  max-width: 90vw;
 }
 
+/* モード選択ボタン */
+#mode-select button {
+  margin: 12px;
+}
+
+/* モード説明ボタン */
+.explanation-btn {
+  font-size: 14px;
+  background: none;
+  color: #666666;
+  padding: 2px 8px;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+/* モード説明テキスト */
+.mode-explanation {
+  display: none;
+  font-size: 14px;
+  color: #666666;
+  margin: 4px 0 12px;
+}
+
+/* 鳥のスタイル */
 .bird {
   position: absolute;
   width: 100px;
@@ -65,6 +92,7 @@ button {
   transform: translateY(-50%);
 }
 
+/* タイマー */
 #timer {
   position: fixed;
   top: 10px;
@@ -75,22 +103,22 @@ button {
   border-radius: 12px;
   box-shadow: 0 0 5px #999;
   display: none;
-}
-
-#result {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  text-align: center;
   z-index: 1000;
-  display: none;
 }
 
+/* 目標達成メッセージ */
+#goal-message {
+  position: fixed;
+  top: 56px; /* タイマー（top:10px＋高さ約40px）より下に表示 */
+  right: 20px;
+  font-family: 'Yomogi', cursive;
+  font-size: 20px;
+  color: #ffffff;
+  z-index: 1001;
+  white-space: nowrap;
+}
+
+/* モード・時間入力パネル */
 #mode-select,
 #target-time-input {
   position: fixed;
@@ -103,23 +131,11 @@ button {
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
   text-align: center;
   z-index: 1000;
-}
-
-#target-time-input {
-  padding: 30px 20px;
   max-width: 90%;
   box-sizing: border-box;
 }
 
-.input-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
+/* 時間入力欄 */
 #target-minutes {
   font-size: 20px;
   padding: 10px 16px;
@@ -130,17 +146,17 @@ button {
   flex-shrink: 0;
 }
 
-#mode-select button {
-  font-size: 18px;
-  padding: 12px 24px;
-  margin: 16px; /* ← 間隔を広く */
-  border: none;
-  border-radius: 10px;
-  background-color: #b2ac93;
-  color: #ffffff;
-  cursor: pointer;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-weight: 500;
-  white-space: nowrap; /* ← 改行させない */
-  max-width: 90vw;
+/* リザルト画面 */
+#result {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 1000;
+  display: none;
 }

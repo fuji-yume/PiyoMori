@@ -5,7 +5,6 @@ const frameRate = 12;
 const frameInterval = 1000 / frameRate;
 const speed = 2;
 const delayBetween = 10000;
-const numBirds = 3;
 
 let startTime = null;
 let targetDuration = null;
@@ -14,6 +13,9 @@ let timerAnimationId = null;
 let birdHasFlown = false;
 let mode = null;
 let escapeTime = null;
+
+// 効果音の読み込み
+const flySound = new Audio('hatofly.mp3');
 
 function chooseMokupiyo() {
   mode = "mokupiyo";
@@ -46,10 +48,9 @@ function startMokupiyo() {
 
 function startPiyomori() {
   startTime = Date.now();
-  createBird(0);
-  for (let i = 1; i < numBirds; i++) {
-    setTimeout(() => createBird(i), i * delayBetween);
-  }
+  spawnBirds();
+
+  let goalReached = false;
 
   function updateTimer() {
     const now = Date.now();
@@ -59,9 +60,9 @@ function startPiyomori() {
     const seconds = String(totalSeconds % 60).padStart(2, '0');
     document.getElementById("timer").textContent = `経過時間：${minutes}:${seconds}`;
 
-    if (mode === "mokupiyo" && elapsed >= targetDuration) {
-      flyAwayBirds();
-      return;
+    if (mode === "mokupiyo" && !goalReached && elapsed >= targetDuration) {
+      goalReached = true;
+      showGoalMessage();
     }
 
     timerAnimationId = requestAnimationFrame(updateTimer);
@@ -70,16 +71,45 @@ function startPiyomori() {
   updateTimer();
 }
 
+function showGoalMessage() {
+  const existing = document.getElementById("goal-message");
+  if (existing) return;
+
+  const message = document.createElement('div');
+  message.id = "goal-message";
+  message.textContent = "目標達成！";
+  message.style.position = 'fixed';
+  message.style.top = '56px';
+  message.style.right = '20px';
+  message.style.fontFamily = "'Yomogi', cursive";
+  message.style.color = "#ffffff";
+  message.style.fontSize = "20px";
+  message.style.whiteSpace = 'nowrap';
+  message.style.zIndex = 1001;
+  document.body.appendChild(message);
+}
+
+function spawnBirds() {
+  function createAndRepeat(index) {
+    if (birdHasFlown) return;
+    createBird(index);
+    setTimeout(() => createAndRepeat(index + 1), delayBetween);
+  }
+  createAndRepeat(0);
+}
+
 function createBird(index) {
   if (birdHasFlown) return;
   const bird = document.createElement('div');
   bird.className = 'bird';
-  bird.id = `bird${index}`;
   document.body.appendChild(bird);
 
   let posX = window.innerWidth + 100;
-  const targetX = window.innerWidth / 2 - (numBirds * 55) + index * 110;
-  const baseY = window.innerHeight / 2 + (index % 2 === 0 ? -40 : 40);
+  const targetX = Math.random() * (window.innerWidth - 100);
+  const baseY = window.innerHeight * (0.1 + Math.random() * 0.8);
+
+  const scale = 0.85 + Math.random() * 0.3;
+  bird.style.transform = `translateY(-50%) scale(${scale})`;
 
   let frameIndex = 0;
   let time = 0;
@@ -104,7 +134,7 @@ function createBird(index) {
         posX -= speed;
         bird.style.left = posX + 'px';
         time += 0.05;
-        const offsetY = Math.sin(time) * 20;
+        const offsetY = Math.sin(time) * 30;
         bird.style.top = baseY + offsetY + 'px';
       } else {
         flying = false;
@@ -124,6 +154,11 @@ function createBird(index) {
 function flyAwayBirds() {
   if (birdHasFlown) return;
   birdHasFlown = true;
+
+  // 効果音を鳴らす
+  flySound.currentTime = 0;
+  flySound.play();
+
   cancelAnimationFrame(timerAnimationId);
   escapeTime = Date.now();
 
@@ -202,7 +237,17 @@ function activateEndTriggers() {
   });
 }
 
+function toggleExplanation(id) {
+  const el = document.getElementById(id);
+  if (el.style.display === 'none' || !el.style.display) {
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
 window.chooseMorimori = chooseMorimori;
 window.chooseMokupiyo = chooseMokupiyo;
 window.startMokupiyo = startMokupiyo;
 window.restartPiyomori = restartPiyomori;
+window.toggleExplanation = toggleExplanation;
