@@ -4,7 +4,7 @@ const restFrame = 'bird_rest.png';
 const frameRate = 12;
 const frameInterval = 1000 / frameRate;
 const speed = 2;
-const delayBetween = 10000;
+const delayBetween = 300000;
 
 let startTime = null;
 let targetDuration = null;
@@ -87,7 +87,15 @@ function showGoalMessage() {
   message.style.whiteSpace = 'nowrap';
   message.style.zIndex = 1001;
   document.body.appendChild(message);
+
+  // ★ここで音を鳴らす！
+  const sound = document.getElementById("goal-sound");
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play().catch(e => console.log("再生エラー:", e));
+  }
 }
+
 
 function spawnBirds() {
   function createAndRepeat(index) {
