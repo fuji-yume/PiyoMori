@@ -4,7 +4,7 @@ const restFrame = 'bird_rest.png';
 const frameRate = 12;
 const frameInterval = 1000 / frameRate;
 const speed = 2;
-const delayBetween = 300000;
+const delayBetween = 10000;
 
 let startTime = null;
 let targetDuration = null;
